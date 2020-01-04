@@ -1,0 +1,47 @@
+ db.AggregatedGenerationPerType.aggregate([ 
+     { 
+         $lookup: { 
+            from:"MapCode",    
+            localField:"MapCodeId",
+            foreignField:"Id",    
+            as:"MapCode" 
+        }  
+    }, 
+    {$unwind: "$MapCode"}, 
+    { 
+        $lookup: { 
+            from:"ResolutionCode",
+            localField:"ResolutionCodeId",    
+            foreignField:"Id",    
+            as:"ResolutionCode" 
+        }  
+    }, 
+    {$unwind: "$ResolutionCode"}, 
+    { 
+        $lookup: { 
+            from:"AllocatedEICDetail",    
+            localField:"AreaCodeId",    
+            foreignField:"Id",    
+            as:"AllocatedEICDetail" 
+        }  
+    }, 
+    {$unwind: "$AllocatedEICDetail"}, 
+    { 
+        $lookup: { 
+            from:"AreaTypeCode",    
+            localField:"AreaTypeCodeId",    
+            foreignField:"Id",    
+            as:"AreaTypeCode" 
+        }  
+    }, 
+    {$unwind: "$AreaTypeCode"},
+    { 
+        $lookup: { DayAheadTotalLoadForecast
+            from:"ProductionType",    
+            localField:"ProductionTypeId",    
+            foreignField:"Id",    
+            as:"ProductionType" 
+        }  
+    }, 
+    {$unwind: "$ProductionType"}, 
+    {$out: "AggregatedGenerationPerType_Aggr"} ])
