@@ -2,12 +2,14 @@ const AggregatedGenerationPerType = require('../models/AggregatedGenerationPerTy
 const csv = require('csv-express');
 
 exports.AggregatedGenerationPerType_get_YMD = (req,res,next)=>{
+    var fulldate = (req.params.fulldate).split("-");
+    console.log(fulldate)
     match = {        
         'ResolutionCode.ResolutionCodeText': req.params.Resolution,
         AreaName: req.params.AreaName, 
-        Year: Number(req.params.Year),
-        Month: Number(req.params.Month),
-        Day: Number(req.params.Day)
+        Year: Number(fulldate[0]),
+        Month: Number(fulldate[1]),
+        Day: Number(fulldate[2])
     }
     if (req.params.ProductionType !== "AllTypes") {
         match['ProductionType.ProductionTypeText'] = req.params.ProductionType;
@@ -56,11 +58,12 @@ exports.AggregatedGenerationPerType_get_YMD = (req,res,next)=>{
 };
 
 exports.AggregatedGenerationPerType_get_YM = (req,res,next)=>{
+    var fulldate = (req.params.fulldate).split("-");
     var match = {        
         'ResolutionCode.ResolutionCodeText': req.params.Resolution,
         AreaName: req.params.AreaName, 
-        Year: Number(req.params.Year),
-        Month: Number(req.params.Month)
+        Year: Number(fulldate[0]),
+        Month: Number(fulldate[1])
     }
     var _id= {Day: "$Day", ProductionType:"$ProductionType.ProductionTypeText"};
     if (req.params.ProductionType !== "AllTypes") {
@@ -124,10 +127,11 @@ exports.AggregatedGenerationPerType_get_YM = (req,res,next)=>{
 };
 
 exports.AggregatedGenerationPerType_get_Y = (req,res,next)=>{
+    var fulldate = (req.params.fulldate).split("-");
     var match = {        
         'ResolutionCode.ResolutionCodeText': req.params.Resolution,
         AreaName: req.params.AreaName, 
-        Year: Number(req.params.Year),
+        Year: Number(fulldate[0]),
     }
     var _id= {Month: "$Month", ProductionType:"$ProductionType.ProductionTypeText"};
     if (req.params.ProductionType !== "AllTypes") {

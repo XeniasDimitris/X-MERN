@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const user_controller = require('../controllers/user_controller')
-
+const verify_token = require('../middleware/chech-auth');
 /**
  * @swagger
  * /user/signup:
@@ -32,7 +32,7 @@ const user_controller = require('../controllers/user_controller')
  *        content: {}
  * 
  */
-router.post('/signup',user_controller.user_signup_post);
+router.post('/Admin/users',user_controller.user_signup_post);
 
 
 /**
@@ -65,6 +65,7 @@ router.post('/signup',user_controller.user_signup_post);
  *        content: {}
  * 
  */
-router.post("/login", user_controller.user_login_post);
+router.post("/Login", user_controller.user_login_post);
   
+router.post("/Logout", verify_token, user_controller.user_logout_post);
 module.exports = router;

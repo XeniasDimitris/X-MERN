@@ -24,7 +24,7 @@ const swaggerOptions = {
     },
     "servers": [
         {
-        "url": "https://localhost:8765/energy/api"
+        "url": "https://localhost:8765/"
         }
     ],
     "tags": [
@@ -73,7 +73,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json()); 
 
 //Initialize the routers of our app
-app.use('/user',userRouter);
+app.use('/',userRouter);
 app.use('/energy/api/ActualTotalLoad',ActualTotalLoadRouter);
 app.use('/energy/api/AggregatedGenerationPerType',AggregatedGenerationPerTypeRouter);
 app.use('/energy/api/DayAheadTotalLoadForecast',DayAheadTotalLoadForecastRouter);

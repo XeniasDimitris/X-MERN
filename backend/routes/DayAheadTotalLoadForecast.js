@@ -6,7 +6,7 @@ const DayAheadTotalLoadForecast_controller = require('../controllers/DayAheadTot
 
 /**
  * @swagger
- * /DayAheadTotalLoadForecast/{AreaName}/{Resolution}/{Year}/{Month}/{Day}:
+ * /energy/api/DayAheadTotalLoadForecast/{AreaName}/{Resolution}/date/{YYYY-MM-DD}:
  *   get:
  *     tags:
  *       - DayAheadTotalLoadForecast
@@ -25,24 +25,12 @@ const DayAheadTotalLoadForecast_controller = require('../controllers/DayAheadTot
  *         required: true
  *         schema:
  *           type: string
- *       - name: Year
+ *       - name: YYYY-MM-DD
  *         in: path
- *         description: The Year for the record ("2018" for the example)
+ *         description: The Day for the record ("2018-1-1" for the example)
  *         required: true
  *         schema:
- *           type: number
- *       - name: Month
- *         in: path
- *         description:  The Month for the record ("1" for the example)
- *         required: true
- *         schema:
- *           type: number
- *       - name: Day
- *         in: path
- *         required: true
- *         description: The Day for the record ("4" for the example)
- *         schema: 
- *           type: number
+ *           type: string
  *       - name: X-OBSERVATORY-AUTH
  *         in: header
  *         required: true
@@ -133,13 +121,13 @@ const DayAheadTotalLoadForecast_controller = require('../controllers/DayAheadTot
  *                      enum:
  *                           - "2018-09-04 11:16:37.0000000"
  */
-router.get('/:AreaName/:Resolution/:Year/:Month/:Day',verify_token, DayAheadTotalLoadForecast_controller.DayAheadTotalLoadForecast_get_YMD);
+router.get('/:AreaName/:Resolution/date/:fulldate',verify_token, DayAheadTotalLoadForecast_controller.DayAheadTotalLoadForecast_get_YMD);
 
 
 
 /**
  * @swagger
- * /DayAheadTotalLoadForecast/{AreaName}/{Resolution}/{Year}/{Month}:
+ * /energy/api/DayAheadTotalLoadForecast/{AreaName}/{Resolution}/month/{YYYY-MM}:
  *   get:
  *     tags:
  *       - DayAheadTotalLoadForecast
@@ -158,18 +146,12 @@ router.get('/:AreaName/:Resolution/:Year/:Month/:Day',verify_token, DayAheadTota
  *         required: true
  *         schema:
  *           type: string
- *       - name: Year
+ *       - name: YYYY-MM
  *         in: path
- *         description: The Year for the record ("2018" for the example)
+ *         description: The Month for the record ("2018-1" for the example)
  *         required: true
  *         schema:
- *           type: number
- *       - name: Month
- *         in: path
- *         description:  The Month for the record ("1" for the example)
- *         required: true
- *         schema:
- *           type: number
+ *           type: string
  *       - name: X-OBSERVATORY-AUTH
  *         in: header
  *         required: true
@@ -251,12 +233,12 @@ router.get('/:AreaName/:Resolution/:Year/:Month/:Day',verify_token, DayAheadTota
  *                         -126713.45
  *   
  */
-router.get('/:AreaName/:Resolution/:Year/:Month',verify_token, DayAheadTotalLoadForecast_controller.DayAheadTotalLoadForecast_get_YM);
+router.get('/:AreaName/:Resolution/month/:fulldate',verify_token, DayAheadTotalLoadForecast_controller.DayAheadTotalLoadForecast_get_YM);
 
 
 /**
  * @swagger
- * /DayAheadTotalLoadForecast/{AreaName}/{Resolution}/{Year}:
+ * /energy/api/DayAheadTotalLoadForecast/{AreaName}/{Resolution}/year/{YYYY}:
  *   get:
  *     tags:
  *       - DayAheadTotalLoadForecast
@@ -280,7 +262,7 @@ router.get('/:AreaName/:Resolution/:Year/:Month',verify_token, DayAheadTotalLoad
  *         description: The Year for the record ("2018" for the example)
  *         required: true
  *         schema:
- *           type: number
+ *           type: string
  *       - name: X-OBSERVATORY-AUTH
  *         in: header
  *         required: true
@@ -358,12 +340,12 @@ router.get('/:AreaName/:Resolution/:Year/:Month',verify_token, DayAheadTotalLoad
  *                         -1308759.35
  *   
  */
-router.get('/:AreaName/:Resolution/:Year/',verify_token, DayAheadTotalLoadForecast_controller.DayAheadTotalLoadForecast_get_Y);
+router.get('/:AreaName/:Resolution/year/:fulldate',verify_token, DayAheadTotalLoadForecast_controller.DayAheadTotalLoadForecast_get_Y);
 
 
 /**
  * @swagger
- * /DayAheadTotalLoadForecast/{AreaName}/{Resolution}:
+ * /energy/api/DayAheadTotalLoadForecast/{AreaName}/{Resolution}:
  *   get:
  *     tags:
  *       - DayAheadTotalLoadForecast
