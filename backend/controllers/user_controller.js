@@ -80,13 +80,13 @@ exports.user_login_post = (req, res, next) => {
             });
           }
           if (result) {
-            const token = jwt.sign(
+            const token = jwt.sign( // HS256
               {
                 userId: user._id
               },
               process.env.JWT_KEY,
               {
-                expiresIn: 60
+                expiresIn: "1h" 
               }
             );
             return res.status(200).header('X-OBSERVATORY-AUTH',token).json({
@@ -105,4 +105,11 @@ exports.user_login_post = (req, res, next) => {
           error: err
         });
       });
+};
+
+exports.user_logout_post = (req,res,next) => {
+    res.status(200).json({
+      message: "Logout Done!"
+    });
+
 };

@@ -5,7 +5,7 @@ const ActualvsForecast_controller = require('../controllers/ActualvsForecast_con
 
 /**
  * @swagger
- * /ActualvsForecast/{AreaName}/{Resolution}/{Year}/{Month}/{Day}:
+ * /energy/api/ActualvsForecast/{AreaName}/{Resolution}/date/{YYYY-MM-DD}:
  *   get:
  *     tags:
  *       - ActualvsForecast
@@ -24,24 +24,12 @@ const ActualvsForecast_controller = require('../controllers/ActualvsForecast_con
  *         required: true
  *         schema:
  *           type: string
- *       - name: Year
- *         in: path
- *         description: The Year for the record ("2018" for the example)
- *         required: true
- *         schema:
- *           type: number
- *       - name: Month
- *         in: path
- *         description:  The Month for the record ("1" for the example)
- *         required: true
- *         schema:
- *           type: number
- *       - name: Day
+ *       - name: YYYY-MM-DD
  *         in: path
  *         required: true
- *         description: The Day for the record ("4" for the example)
+ *         description: The Day for the record ("2018-1-4" for the example)
  *         schema: 
- *           type: number
+ *           type: string
  *       - name: X-OBSERVATORY-AUTH
  *         in: header
  *         required: true
@@ -131,12 +119,12 @@ const ActualvsForecast_controller = require('../controllers/ActualvsForecast_con
  *                      enum:
  *                          - 5045
  */
-router.get('/:AreaName/:Resolution/:Year/:Month/:Day',verify_token, ActualvsForecast_controller.ActualvsForecast_get_YMD);
+router.get('/:AreaName/:Resolution/date/:fulldate',verify_token, ActualvsForecast_controller.ActualvsForecast_get_YMD);
 
 
 /**
  * @swagger
- * /ActualvsForecast/{AreaName}/{Resolution}/{Year}/{Month}:
+ * /energy/api/ActualvsForecast/{AreaName}/{Resolution}/month/{YYYY-MM}:
  *   get:
  *     tags:
  *       - ActualvsForecast
@@ -155,18 +143,12 @@ router.get('/:AreaName/:Resolution/:Year/:Month/:Day',verify_token, ActualvsFore
  *         required: true
  *         schema:
  *           type: string
- *       - name: Year
+ *       - name: YYYY-MM
  *         in: path
- *         description: The Year for the record ("2018" for the example)
+ *         description:  The Month for the record ("2018-1" for the example)
  *         required: true
  *         schema:
- *           type: number
- *       - name: Month
- *         in: path
- *         description:  The Month for the record ("1" for the example)
- *         required: true
- *         schema:
- *           type: number
+ *           type: string
  *       - name: X-OBSERVATORY-AUTH
  *         in: header
  *         required: true
@@ -251,12 +233,12 @@ router.get('/:AreaName/:Resolution/:Year/:Month/:Day',verify_token, ActualvsFore
  *                      enum:
  *                          - 5045
  */
-router.get('/:AreaName/:Resolution/:Year/:Month',verify_token, ActualvsForecast_controller.ActualvsForecast_get_YM);
+router.get('/:AreaName/:Resolution/month/:fulldate',verify_token, ActualvsForecast_controller.ActualvsForecast_get_YM);
 
 
 /**
  * @swagger
- * /ActualvsForecast/{AreaName}/{Resolution}/{Year}:
+ * /energy/api/ActualvsForecast/{AreaName}/{Resolution}/year/{YYYY}:
  *   get:
  *     tags:
  *       - ActualvsForecast
@@ -275,18 +257,12 @@ router.get('/:AreaName/:Resolution/:Year/:Month',verify_token, ActualvsForecast_
  *         required: true
  *         schema:
  *           type: string
- *       - name: Year
+ *       - name: YYYY
  *         in: path
  *         description: The Year for the record ("2018" for the example)
  *         required: true
  *         schema:
- *           type: number
- *       - name: Month
- *         in: path
- *         description:  The Month for the record ("1" for the example)
- *         required: true
- *         schema:
- *           type: number
+ *           type: string
  *       - name: X-OBSERVATORY-AUTH
  *         in: header
  *         required: true
@@ -367,12 +343,12 @@ router.get('/:AreaName/:Resolution/:Year/:Month',verify_token, ActualvsForecast_
  *                      enum:
  *                          - 5045
  */
-router.get('/:AreaName/:Resolution/:Year/',verify_token, ActualvsForecast_controller.ActualvsForecast_get_Y);
+router.get('/:AreaName/:Resolution/year/:fulldate',verify_token, ActualvsForecast_controller.ActualvsForecast_get_Y);
 
 
 /**
  * @swagger
- * /ActualvsForecast/{AreaName}/{Resolution}:
+ * /energy/api/ActualvsForecast/{AreaName}/{Resolution}:
  *   get:
  *     tags:
  *       - ActualvsForecast
@@ -391,24 +367,6 @@ router.get('/:AreaName/:Resolution/:Year/',verify_token, ActualvsForecast_contro
  *         required: true
  *         schema:
  *           type: string
- *       - name: Year
- *         in: path
- *         description: The Year for the record ("2018" for the example)
- *         required: true
- *         schema:
- *           type: number
- *       - name: Month
- *         in: path
- *         description:  The Month for the record ("1" for the example)
- *         required: true
- *         schema:
- *           type: number
- *       - name: Day
- *         in: path
- *         required: true
- *         description: The Day for the record ("4" for the example)
- *         schema: 
- *           type: number
  *       - name: X-OBSERVATORY-AUTH
  *         in: header
  *         required: true

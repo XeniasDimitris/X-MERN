@@ -2,14 +2,15 @@ const ActualTotalLoad = require('../models/ActualTotalLoad.model');
 const csv = require('csv-express');
 
 exports.ActualTotalLoad_get_YMD = (req,res,next)=>{
+    var fulldate = (req.params.fulldate).split("-");
     ActualTotalLoad
         .aggregate([
             { $match:{
             'ResolutionCode.ResolutionCodeText': req.params.Resolution,
             AreaName: req.params.AreaName, 
-            Year: Number(req.params.Year),
-            Month: Number(req.params.Month),
-            Day: Number(req.params.Day)
+            Year: Number(fulldate[0]),
+            Month: Number(fulldate[1]),
+            Day: Number(fulldate[2])
             }},
             { $sort: {DateTime: 1}},
             { $project:{
@@ -51,13 +52,14 @@ exports.ActualTotalLoad_get_YMD = (req,res,next)=>{
 };
 
 exports.ActualTotalLoad_get_YM = (req,res,next)=>{
+    var fulldate = (req.params.fulldate).split("-");
     ActualTotalLoad
         .aggregate([
             { $match:{
                 AreaName: req.params.AreaName,
                 'ResolutionCode.ResolutionCodeText': req.params.Resolution,
-                Year: Number(req.params.Year),
-                Month: Number(req.params.Month)
+                Year: Number(fulldate[0]),
+                Month: Number(fulldate[1])
               }},
             { $group:{
                 _id: "$Day",
@@ -113,12 +115,13 @@ exports.ActualTotalLoad_get_YM = (req,res,next)=>{
 };
 
 exports.ActualTotalLoad_get_Y = (req,res,next)=>{
+    var fulldate = (req.params.fulldate).split("-");
     ActualTotalLoad
         .aggregate([
             { $match:{
                 AreaName: req.params.AreaName,
                 'ResolutionCode.ResolutionCodeText': req.params.Resolution,
-                Year: Number(req.params.Year)
+                Year: Number(fulldate[0])
               }},
             { $group:{
                 _id: "$Month",

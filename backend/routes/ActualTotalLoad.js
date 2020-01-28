@@ -5,7 +5,7 @@ const ActualTotalLoad_controller = require('../controllers/ActualTotalLoad_contr
 
 /**
  * @swagger
- * /ActualTotalLoad/{AreaName}/{Resolution}/{Year}/{Month}/{Day}:
+ * /energy/api/ActualTotalLoad/{AreaName}/{Resolution}/date/{YYYY-MM-DD}:
  *   get:
  *     tags:
  *       - ActualTotalLoad
@@ -24,24 +24,12 @@ const ActualTotalLoad_controller = require('../controllers/ActualTotalLoad_contr
  *         required: true
  *         schema:
  *           type: string
- *       - name: Year
+ *       - name: YYYY-MM-DD
  *         in: path
- *         description: The Year for the record ("2018" for the example)
+ *         description: The Day for the record ("2018-1-4" for the example)
  *         required: true
  *         schema:
- *           type: number
- *       - name: Month
- *         in: path
- *         description:  The Month for the record ("1" for the example)
- *         required: true
- *         schema:
- *           type: number
- *       - name: Day
- *         in: path
- *         required: true
- *         description: The Day for the record ("4" for the example)
- *         schema: 
- *           type: number
+ *           type: string
  *       - name: X-OBSERVATORY-AUTH
  *         in: header
  *         required: true
@@ -132,13 +120,13 @@ const ActualTotalLoad_controller = require('../controllers/ActualTotalLoad_contr
  *                      enum:
  *                           - "2018-09-04 11:16:37.0000000"
  */
-router.get('/:AreaName/:Resolution/:Year/:Month/:Day',verify_token, ActualTotalLoad_controller.ActualTotalLoad_get_YMD);
+router.get('/:AreaName/:Resolution/date/:fulldate',verify_token, ActualTotalLoad_controller.ActualTotalLoad_get_YMD);
 
 
 
 /**
  * @swagger
- * /ActualTotalLoad/{AreaName}/{Resolution}/{Year}/{Month}:
+ * /energy/api/ActualTotalLoad/{AreaName}/{Resolution}/month/{YYYY-MM}:
  *   get:
  *     tags:
  *       - ActualTotalLoad
@@ -157,18 +145,12 @@ router.get('/:AreaName/:Resolution/:Year/:Month/:Day',verify_token, ActualTotalL
  *         required: true
  *         schema:
  *           type: string
- *       - name: Year
+ *       - name: YYYY-MM
  *         in: path
- *         description: The Year for the record ("2018" for the example)
+ *         description:  The Month for the record ("2018-1" for the example)
  *         required: true
  *         schema:
- *           type: number
- *       - name: Month
- *         in: path
- *         description:  The Month for the record ("1" for the example)
- *         required: true
- *         schema:
- *           type: number
+ *           type: string
  *       - name: X-OBSERVATORY-AUTH
  *         in: header
  *         required: true
@@ -250,13 +232,13 @@ router.get('/:AreaName/:Resolution/:Year/:Month/:Day',verify_token, ActualTotalL
  *                         -126713.45
  *   
  */
-router.get('/:AreaName/:Resolution/:Year/:Month',verify_token, ActualTotalLoad_controller.ActualTotalLoad_get_YM);
+router.get('/:AreaName/:Resolution/month/:fulldate',verify_token, ActualTotalLoad_controller.ActualTotalLoad_get_YM);
 
 
 
 /**
  * @swagger
- * /ActualTotalLoad/{AreaName}/{Resolution}/{Year}:
+ * /energy/api/ActualTotalLoad/{AreaName}/{Resolution}/year/{YYYY}:
  *   get:
  *     tags:
  *       - ActualTotalLoad
@@ -275,7 +257,7 @@ router.get('/:AreaName/:Resolution/:Year/:Month',verify_token, ActualTotalLoad_c
  *         required: true
  *         schema:
  *           type: string
- *       - name: Year
+ *       - name: YYYY
  *         in: path
  *         description: The Year for the record ("2018" for the example)
  *         required: true
@@ -358,12 +340,12 @@ router.get('/:AreaName/:Resolution/:Year/:Month',verify_token, ActualTotalLoad_c
  *                         -1308759.35
  *   
  */
-router.get('/:AreaName/:Resolution/:Year/',verify_token, ActualTotalLoad_controller.ActualTotalLoad_get_Y);
+router.get('/:AreaName/:Resolution/year/:fulldate',verify_token, ActualTotalLoad_controller.ActualTotalLoad_get_Y);
 
 
 /**
  * @swagger
- * /ActualTotalLoad/{AreaName}/{Resolution}:
+ * /energy/api/ActualTotalLoad/{AreaName}/{Resolution}:
  *   get:
  *     tags:
  *       - ActualTotalLoad

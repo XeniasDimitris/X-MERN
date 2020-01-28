@@ -6,7 +6,7 @@ const AggregatedGenerationPerType_controller = require('../controllers/Aggregate
 
 /**
  * @swagger
- * /AggregatedGenerationPerType/{AreaName}/{ProductionType}/{Resolution}/{Year}/{Month}/{Day}:
+ * /energy/api/AggregatedGenerationPerType/{AreaName}/{ProductionType}/{Resolution}/date/{YYYY-MM-DD}:
  *   get:
  *     tags:
  *       - AggregatedGenerationPerType
@@ -40,24 +40,12 @@ const AggregatedGenerationPerType_controller = require('../controllers/Aggregate
  *         required: true
  *         schema:
  *           type: string
- *       - name: Year
- *         in: path
- *         description: The Year for the record ("2018" for the example)
- *         required: true
- *         schema:
- *           type: number
- *       - name: Month
- *         in: path
- *         description:  The Month for the record ("1" for the example)
- *         required: true
- *         schema:
- *           type: number
- *       - name: Day
+ *       - name: YYYY-MM-DD
  *         in: path
  *         required: true
- *         description: The Day for the record ("4" for the example)
+ *         description: The Day for the record ("2018-1-4" for the example)
  *         schema: 
- *           type: number
+ *           type: string
  *       - name: X-OBSERVATORY-AUTH
  *         in: header
  *         required: true
@@ -152,12 +140,12 @@ const AggregatedGenerationPerType_controller = require('../controllers/Aggregate
  *                      enum:
  *                           - "2018-09-04 11:16:37.0000000"
  */
-router.get('/:AreaName/:ProductionType/:Resolution/:Year/:Month/:Day',verify_token,AggregatedGenerationPerType_controller.AggregatedGenerationPerType_get_YMD);
+router.get('/:AreaName/:ProductionType/:Resolution/date/:fulldate',verify_token,AggregatedGenerationPerType_controller.AggregatedGenerationPerType_get_YMD);
 
 
 /**
  * @swagger
- * /AggregatedGenerationPerType/{AreaName}/{ProductionType}/{Resolution}/{Year}/{Month}:
+ * /energy/api/AggregatedGenerationPerType/{AreaName}/{ProductionType}/{Resolution}/month/{YYYY-MM}:
  *   get:
  *     tags:
  *       - AggregatedGenerationPerType
@@ -191,18 +179,12 @@ router.get('/:AreaName/:ProductionType/:Resolution/:Year/:Month/:Day',verify_tok
  *         required: true
  *         schema:
  *           type: string
- *       - name: Year
+ *       - name: YYYY-MM
  *         in: path
- *         description: The Year for the record ("2018" for the example)
+ *         description:  The Month for the record ("1-2018" for the example)
  *         required: true
  *         schema:
- *           type: number
- *       - name: Month
- *         in: path
- *         description:  The Month for the record ("1" for the example)
- *         required: true
- *         schema:
- *           type: number
+ *           type: string
  *       - name: X-OBSERVATORY-AUTH
  *         in: header
  *         required: true
@@ -292,11 +274,11 @@ router.get('/:AreaName/:ProductionType/:Resolution/:Year/:Month/:Day',verify_tok
  *                      enum:
  *                          - 2223
  */
-router.get('/:AreaName/:ProductionType/:Resolution/:Year/:Month',verify_token, AggregatedGenerationPerType_controller.AggregatedGenerationPerType_get_YM);
+router.get('/:AreaName/:ProductionType/:Resolution/month/:fulldate',verify_token, AggregatedGenerationPerType_controller.AggregatedGenerationPerType_get_YM);
 
 /**
  * @swagger
- * /AggregatedGenerationPerType/{AreaName}/{ProductionType}/{Resolution}/{Year}:
+ * /energy/api/AggregatedGenerationPerType/{AreaName}/{ProductionType}/{Resolution}/year/{YYYY}:
  *   get:
  *     tags:
  *       - AggregatedGenerationPerType
@@ -330,12 +312,12 @@ router.get('/:AreaName/:ProductionType/:Resolution/:Year/:Month',verify_token, A
  *         required: true
  *         schema:
  *           type: string
- *       - name: Year
+ *       - name: YYYY
  *         in: path
  *         description: The Year for the record ("2018" for the example)
  *         required: true
  *         schema:
- *           type: number
+ *           type: string
  *       - name: X-OBSERVATORY-AUTH
  *         in: header
  *         required: true
@@ -416,12 +398,12 @@ router.get('/:AreaName/:ProductionType/:Resolution/:Year/:Month',verify_token, A
  *                      enum:
  *                          - 2223
  */
-router.get('/:AreaName/:ProductionType/:Resolution/:Year',verify_token, AggregatedGenerationPerType_controller.AggregatedGenerationPerType_get_Y);
+router.get('/:AreaName/:ProductionType/:Resolution/year/:fulldate',verify_token, AggregatedGenerationPerType_controller.AggregatedGenerationPerType_get_Y);
 
 
 /**
  * @swagger
- * /AggregatedGenerationPerType/{AreaName}/{ProductionType}/{Resolution}:
+ * /energy/api/AggregatedGenerationPerType/{AreaName}/{ProductionType}/{Resolution}:
  *   get:
  *     tags:
  *       - AggregatedGenerationPerType
@@ -455,24 +437,6 @@ router.get('/:AreaName/:ProductionType/:Resolution/:Year',verify_token, Aggregat
  *         required: true
  *         schema:
  *           type: string
- *       - name: Year
- *         in: path
- *         description: The Year for the record ("2018" for the example)
- *         required: true
- *         schema:
- *           type: number
- *       - name: Month
- *         in: path
- *         description:  The Month for the record ("1" for the example)
- *         required: true
- *         schema:
- *           type: number
- *       - name: Day
- *         in: path
- *         required: true
- *         description: The Day for the record ("4" for the example)
- *         schema: 
- *           type: number
  *       - name: X-OBSERVATORY-AUTH
  *         in: header
  *         required: true
